@@ -17,7 +17,7 @@ use PHPRouter\Route;
 
 try {
     $config = Config::loadFromJsonFile(PUBLIC_PATH . '/routes.json');
-    $config["base_path"] = BASE_PATH;
+    $config["base_path"] = empty(BASE_PATH) ? "/" : BASE_PATH;
     $router = Router::parseConfig($config);
     $router->matchCurrentRequest();
 } catch (Exception $e) {
