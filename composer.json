@@ -1,0 +1,41 @@
+{
+    
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories":[{
+        "type": "package",
+        "package": {
+            "name": "dannyvankooten/php-router",
+            "version": "dev-master",
+            "source": {
+                "url": "https://github.com/jasonhenderson/php-router",
+                "type": "git",
+                "reference": "master"
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPRouter\\": "src/"
+                }
+            }
+        }
+    }],
+    "require": {
+        "cebe/markdown": "~1.0.1",
+        "cebe/markdown-latex": "*",
+        "dannyvankooten/php-router": "dev-master",
+        "fig/http-message-util": "^1.1",
+        "dompdf/dompdf": "^0.8.0",
+        "jonnyw/php-phantomjs": "4.*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
