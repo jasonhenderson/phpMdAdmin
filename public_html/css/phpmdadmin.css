@@ -1,0 +1,95 @@
+html, body {
+    height: 100%;
+}
+
+body.fixed {
+    /*overflow: hidden;*/
+}
+
+html body .container-fluid.body-content {
+    position: absolute;
+    top: 50px;
+    bottom: 50px;
+    right: 0;
+    left: 0;
+    overflow-y: auto;
+    padding-top: 20px;
+}
+
+.header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #4C4;
+    height: 50px;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4C4;
+    height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    color: #99979c;
+    text-align: center;
+    background-color: #2a2730;
+}
+
+.footer-links {
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+.right {
+    float: right;
+    padding: 10px;
+}
+
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
+.bs-docs-footer {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 100px;
+    color: #99979c;
+    text-align: center;
+    background-color: #2a2730;
+}
+
+.editor {
+    margin: 10px;
+}
+
+@media (min-width: 768px) {
+    .footer {
+        text-align: left;
+    }
+}
+
+
+/*Fix for dropdown getting cutoff in table */
+
+@media (max-width: 767px) {
+    .table-responsive .dropdown-menu,
+    .table-responsive .dropdown-toggle {
+        position: static !important;
+    }
+}
+
+
+/*Fix for dropdown getting cutoff in table */
+
+@media (min-width: 768px) {
+    .table-responsive {
+        overflow: visible;
+    }
+}
