@@ -1,0 +1,41 @@
+http {
+    include mime.types;
+    default_type application/octet-stream;
+    sendfile off;
+    keepalive_timeout 65;
+    fastcgi_buffers 256 4k;
+
+    # define an easy to reference name that can be used in fastgi_pass
+    upstream heroku-fcgi {
+        #server 127.0.0.1:4999 max_fails=3 fail_timeout=3s;
+        server unix:/tmp/heroku.fcgi.<?php echo getenv('PORT')?:'8080'?>.sock max_fails=3 fail_timeout=3s;
+        keepalive 16;
+    }
+
+    server {
+
+        server_name localhost;
+        listen <?php echo getenv('PORT')?:'8080'?>;
+        port_in_redirect off;
+        root "<?php echo getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>";
+
+        rewrite_log on;
+        error_log stderr notice;
+        access_log /tmp/heroku.nginx_access.<?php echo getenv('PORT')?:'8080'?>.log;
+
+        location @apphandler {
+            fastcgi_pass heroku-fcgi;
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME <?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>/app.php;
+            fastcgi_param SCRIPT_NAME /test/app.php;
+            fastcgi_param REQUEST_URI /test$uri?$args;
+            fastcgi_param HTTPS off;
+        }
+
+        # restrict access to hidden files, just in case
+        location ~ /\. {
+            deny all;
+        }
+    }
+}

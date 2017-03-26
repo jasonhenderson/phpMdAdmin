@@ -1,0 +1,51 @@
+server {
+  listen      [::]:$NGINX_PORT;
+  listen      $NGINX_PORT;
+  server_name $NOSSL_SERVER_NAME;
+  access_log  /var/log/nginx/${APP}-access.log;
+  error_log   /var/log/nginx/${APP}-error.log;
+
+  # Static files  
+  # location ~ ^/(images/|img/|javascripts/|js/|css/|stylesheets/|flash/|media/|static/|robots.txt|humans.txt|favicon.ico|index.html) {
+  location ~ \.(jpg|jpeg|gif|css|png|js|ico|html|eot|svg|ttf|woff)$ {
+    root "<?=getenv('DOCUMENT_ROOT')?:getenv('HEROKU_APP_DIR')?:getcwd()?>";
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+    access_log off;
+  }
+       
+  location / { 
+
+    try_files $uri $uri/ /index.php?$query_string;
+    gzip on;
+    gzip_min_length  1100;
+    gzip_buffers  4 32k;
+    gzip_types    text/css text/javascript text/xml text/plain text/x-component application/javascript application/x-javascript application/json application/xml  application/rss+xml font/truetype application/x-font-ttf font/opentype application/vnd.ms-fontobject image/svg+xml;
+    gzip_vary on;
+    gzip_comp_level  6;
+
+    proxy_pass  http://$APP; ### <- HERE IS THE MOST IMPORTANT PART
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host \$http_host;
+    proxy_set_header X-Forwarded-Proto \$scheme;
+    proxy_set_header X-Forwarded-For \$remote_addr;
+    proxy_set_header X-Forwarded-Port \$server_port;
+    proxy_set_header X-Request-Start \$msec;
+  }
+  
+  location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+
+		# With php7-fpm:
+		fastcgi_pass unix:/var/run/php7-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi.conf;
+		fastcgi_intercept_errors on;
+	}
+
+  include $DOKKU_ROOT/$APP/nginx.conf.d/*.conf;
+}
