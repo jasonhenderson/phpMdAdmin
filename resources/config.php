@@ -241,7 +241,7 @@ class Config
     public function getBasePath()
     {
         $base = getenv("PHPMDADMIN_BASE");
-        if (empty($base)) {
+        if (is_null($base)) {
             $base = '/' . basename(realpath(dirname(__FILE__) . '/../'));
         }
         return $base;
