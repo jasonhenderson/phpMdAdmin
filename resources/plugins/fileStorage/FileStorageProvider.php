@@ -367,7 +367,7 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
      * @param string  $file
      * @return
      */
-    public function filePath($file = DocType::Readme . FileExt::Markdown)
+    public function filePath($file)
     {
         return $this->dataDir . $this->group . '/' . $file;
     }

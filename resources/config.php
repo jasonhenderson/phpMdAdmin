@@ -44,7 +44,7 @@ defined("ROOT_PATH")
     or define("ROOT_PATH", realpath(dirname(__FILE__) . '/../'));
 
 defined("BASE_PATH")
-    or define("BASE_PATH", '/' . basename(realpath(dirname(__FILE__) . '/../')));
+    or define("BASE_PATH", Config::getBasePath());
 
 require_once PLUGINS_PATH . "/fileStorage/FileStorageProvider.php";
 
@@ -229,6 +229,22 @@ class Config
 
             fclose($fp);
         }
+    }
+
+
+
+    /**
+     *
+     *
+     * @return
+     */
+    public function getBasePath()
+    {
+        $base = getenv("PHPMDADMIN_BASE");
+        if (empty($base)) {
+            $base = '/' . basename(realpath(dirname(__FILE__) . '/../'));
+        }
+        return $base;
     }
 
 
