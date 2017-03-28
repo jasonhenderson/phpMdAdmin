@@ -6,14 +6,8 @@
     # let it pass through without being routed, otherwise route
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule \.(css|js|png|jpg|jpeg|pdf|gif|ico)$ - [NC,L]
-    
     RewriteRule ^(.*)$ public_html/index.php [L,QSA]  
-    # RewriteEngine On
-    # RewriteCond %{REQUEST_FILENAME} !-f
-    # RewriteCond %{REQUEST_FILENAME} !-d
-    # RewriteRule ^(assets|css|js)/(.*)$ public_html/$1/$2 [NC,L] 
-    # RewriteRule ^([a-zA-Z0-9_-\s]+)/([a-zA-Z0-9_-\s]+)/([a-zA-Z0-9_-\s]+)$ public_html/index.php?controller=$1&action=$2&id=$3 [NC,L]
-    # RewriteRule ^([a-zA-Z0-9_-\s]+)/([a-zA-Z0-9_-\s]+)$ public_html/index.php?controller=$1&action=$2 [NC,L]
-    # RewriteRule ^([a-zA-Z0-9_-\s]+)$ public_html/index.php?controller=$1 [NC,L]
-    # RewriteRule .* public_html/index.php [NC,L]
 </IfModule>  
+
+php_value post_max_size 32M
+php_value upload_max_filesize 24M
