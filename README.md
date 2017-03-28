@@ -37,5 +37,15 @@ chown -R 32767:32767 /var/lib/dokku/data/storage/phpmdadmin
 dokku storage:mount phpmdadmin /var/lib/dokku/data/storage/phpmdadmin:/app/storage
 ```
 
+### nginx Configuration
+1. Increase size allowed in upload
+```
+mkdir /home/dokku/myapp/nginx.conf.d/
+echo 'client_max_body_size 50M;' > /home/dokku/myapp/nginx.conf.d/upload.conf
+chown dokku:dokku /home/dokku/myapp/nginx.conf.d/upload.conf
+service nginx reload
+```
+
+
 ## Cloud9 Installation
 1. https://github.com/GabrielGil/c9-lemp
