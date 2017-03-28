@@ -31,9 +31,9 @@
         <form class="form-inline" action="<?php echo BASE_PATH?>/api/createGroup" method="POST">
             <div class="form-group">
                 <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
-                <label class="sr-only" for="exampleInputAmount">Create New Group</label>
+                <label class="sr-only" for="group">Create New Group</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="New Group Name" id="groupName" id="groupName" name="groupName">
+                    <input type="text" class="form-control" placeholder="New Group Name" id="group" name="group">
                 </div>
                 <button type="submit" class="btn btn-success" name="submit">
                     <span class="glyphicon glyphicon-plus glyphicon-reverse" aria-hidden="true"></span>

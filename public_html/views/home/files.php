@@ -40,9 +40,9 @@
                 <a class="btn btn-success" href="<?php echo BASE_PATH?>/assets/upload/<?php echo $controller->group ?>">
                     Add <span class="glyphicon glyphicon-picture glyphicon-reverse" aria-hidden="true"></span>
                 </a>
-                <label class="sr-only" for="fileName">Create New Group</label>
+                <label class="sr-only" for="file">Create New Group</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="New File Name" id="fileName" name="fileName">
+                    <input type="text" class="form-control" placeholder="New File Name" id="file" name="file">
                     <input type="hidden" name="group" value="<?php echo $controller->group?>">
                 </div>
                 <button type="submit" class="btn btn-success" name="submit">

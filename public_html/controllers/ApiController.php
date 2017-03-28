@@ -31,9 +31,9 @@ class ApiController extends ControllerBase {
         $this->view = '/api/redirect.php';
         $this->master = '/empty.php';
 
-        if (!empty($_POST["groupName"])) {
+        if (!empty($_POST["group"])) {
 
-            $error = Config::storage()->createGroup($_POST["groupName"]);
+            $error = Config::storage()->createGroup($_POST["group"]);
 
             if (!empty($error)) {
                 $this->view = '/admin/error.php';
@@ -104,14 +104,14 @@ class ApiController extends ControllerBase {
      */
     public function createFile()
     {
-        if (!empty($_POST["groupName"]) &&
-            !empty($_POST["fileName"])) {
+        if (!empty($_POST["group"]) &&
+            !empty($_POST["file"])) {
 
             $this->view = '/api/redirect.php';
             $this->master = '/empty.php';
-            $this->redirect = BASE_PATH . '/files/' . $_POST["groupName"];
+            $this->redirect = BASE_PATH . '/files/' . $_POST["group"];
 
-            $error = Config::storage($_POST["groupName"])->saveFile($_POST["fileName"]);
+            $error = Config::storage($_POST["group"])->saveFile($_POST["file"]);
 
             if (!empty($error)) {
                 $this->view = '/admin/error.php';
@@ -131,7 +131,7 @@ class ApiController extends ControllerBase {
             $this->master = '/threePanel.php';
             $this->message = "You must provide a file name to add the file";
             $this->level = ErrorLevel::Error;
-            $this->redirect = BASE_PATH . "/files/" . $_POST["groupName"];
+            $this->redirect = BASE_PATH . "/files/" . $_POST["group"];
         }
 
         $this->render();
