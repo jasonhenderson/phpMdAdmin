@@ -451,7 +451,13 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
     {
         // Set the base directory
         $this->dataRelDir = $dataRelDir;
-        $this->dataDir = ROOT_PATH . $dataRelDir;
+
+        $dataDir = getenv("APP_DATAPATH");
+        if (empty($dataDir)) {
+            $dataDir = ROOT_PATH . $dataRelDir;
+        }
+
+        $this->dataDir = $dataDir;
     }
 
 

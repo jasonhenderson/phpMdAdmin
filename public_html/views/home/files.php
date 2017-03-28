@@ -131,7 +131,7 @@ foreach ($controller->files as $file) {
     echo "    </button>";
     echo "    <ul class='dropdown-menu'>";
     echo "        <li><a class='url' data-row='" . $rowNumber . "' href='" . $urlBase . $pageUrl . "'>Page</a></li>";
-    echo "        <li><a class='url' data-row='" . $rowNumber . "' href='" . $urlBase . $pageSlidesUrl . "'>Slides</a></li>";
+    echo "        <li><a class='url' data-row='" . $rowNumber . "' href='" . $urlBase . $slidesUrl . "'>Slides</a></li>";
     // echo "        <li><a class='url' href=''>PDF</a></li>";
     echo "    </ul>";
     echo "</div>";

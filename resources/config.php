@@ -238,9 +238,9 @@ class Config
      *
      * @return
      */
-    public function getBasePath()
+    public static function getBasePath()
     {
-        $base = getenv("PHPMDADMIN_BASE");
+        $base = getenv("APP_BASEPATH");
         if (is_null($base)) {
             $base = '/' . basename(realpath(dirname(__FILE__) . '/../'));
         }
