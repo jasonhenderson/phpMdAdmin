@@ -57,7 +57,7 @@ class AssetsController extends FileControllerBase {
 
             // Process each file
             for ($i = 0; $i < $count; $i++) {
-                if ($_FILES["fileInput"]["error"][i] > 0) {
+                if ($_FILES["fileInput"]["error"][$i] > 0) {
                     echo "Error: " . $_FILES["fileInput"]["error"][$i] . "<br>";
                 }
                 else {
