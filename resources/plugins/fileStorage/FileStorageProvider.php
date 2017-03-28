@@ -458,6 +458,9 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
         }
 
         $this->dataDir = $dataDir;
+
+        error_log("data directory")
+        error_log($this->dataDir);
     }
 
 
