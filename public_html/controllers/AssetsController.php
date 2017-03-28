@@ -50,26 +50,35 @@ class AssetsController extends FileControllerBase {
     {
         // Save data if passed up
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            var_dump($_FILES);
-
             // Get the number of files passed up
             $count = count($_FILES["fileInput"]["error"]);
 
             // Process each file
             for ($i = 0; $i < $count; $i++) {
                 if ($_FILES["fileInput"]["error"][$i] > 0) {
-                    echo "Error: " . $_FILES["fileInput"]["error"][$i] . "<br>";
+                    switch ($_FILES["fileInput"]["error"][$i]) {
+                    case UPLOAD_ERR_OK:
+                        break;
+                    case UPLOAD_ERR_NO_FILE:
+                        //throw new RuntimeException('No file sent.');
+                        $error = "No file sent.";
+                    case UPLOAD_ERR_INI_SIZE:
+                    case UPLOAD_ERR_FORM_SIZE:
+                        $error = "Exceeded filesize limit.";
+                    default:
+                        $error = "Unknown errors.";
+                    }
                 }
                 else {
                     $fileName = $_FILES["fileInput"]["name"][$i];
                     $tempPath = $_FILES["fileInput"]["tmp_name"][$i];
-                }
 
-                $error = Config::storage($group)->saveAsset($tempPath, $fileName);
+                    $error = Config::storage($group)->saveAsset($tempPath, $fileName);
+                }
             }
 
-
             if (!empty($error)) {
+                error_log("error saving asset: $error");
                 // Return JSON error
             }
             else {

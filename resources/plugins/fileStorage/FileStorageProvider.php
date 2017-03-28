@@ -139,13 +139,14 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
 
         // Only take files that are files not directories
         foreach ($items as $item) {
+            $itemName = rtrim($item, "_");
             $itemPath = $this->assetsDir() . "/" . $item;
             if (is_file($itemPath) &&
                 !in_array($item, array(".", ".."))) {
 
                 $assets[] = [
                 "group" => $group,
-                "asset" => $item,
+                "asset" => $itemName,
                 "assetPath" => $this->assetsPath() . "/" . $item
                 ];
             }
@@ -382,7 +383,8 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
      */
     public function assetFilePath($fileName)
     {
-        return $this->dataDir . $this->group . '/assets/' . $fileName;
+        // Add __ at the end to not allow malicious file names (strip off when we get file names)
+        return $this->dataDir . $this->group . '/assets/' . $fileName . '__';
     }
 
 
