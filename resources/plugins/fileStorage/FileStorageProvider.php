@@ -139,7 +139,7 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
 
         // Only take files that are files not directories
         foreach ($items as $item) {
-            $itemName = rtrim($item, "_");
+            $itemName = ltrim($item, "_");
             $itemPath = $this->assetsDir() . "/" . $item;
             if (is_file($itemPath) &&
                 !in_array($item, array(".", ".."))) {
@@ -383,8 +383,8 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
      */
     public function assetFilePath($fileName)
     {
-        // Add __ at the end to not allow malicious file names (strip off when we get file names)
-        return $this->dataDir . $this->group . '/assets/' . $fileName . '__';
+        // Add __ at the beginning to not allow malicious file names (strip off when we get file names)
+        return $this->dataDir . $this->group . '/assets/' . '__' . $fileName;
     }
 
 

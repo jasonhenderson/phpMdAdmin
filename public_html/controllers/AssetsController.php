@@ -23,15 +23,35 @@ require_once CONTROLLERS_PATH . '/FileControllerBase.php';
 
 class AssetsController extends FileControllerBase {
 
+
     /**
      *
      *
      * @param string  $group
+     * @param string  $file
      */
-    public function index($group)
+    public function index($group, $file = NULL)
     {
         // Save data if passed up
         // Always show image again
+        if (!empty($file)) {
+            $filePath = Config::storage($group)->assetFilePath($file);
+            error_log("getting file path: $filePath");
+
+            if (file_exists($filePath)) {
+                header('Content-Description: File Transfer');
+                header('Content-Type: ' . mime_content_type($filePath));
+                header('Content-Disposition: attachment; filename="' . ltrim(basename($filePath), "_") . '"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($filePath));
+                readfile($filePath);
+                exit;
+            }
+        }
+
+        // Just show the upload page
         $this->pageTitle = "edit $group";
         $this->view = '/assets/upload.php';
         $this->master = '/threePanel.php';

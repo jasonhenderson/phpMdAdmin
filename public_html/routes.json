@@ -36,7 +36,7 @@
       "controller": "EditController.text",
       "method": "GET"
     }, {
-      "path": "/assets/:group",
+      "path": "/assets/:group/:file",
       "controller": "AssetsController.index",
       "method": "GET"
     }, {
