@@ -9,5 +9,12 @@
     RewriteRule ^(.*)$ public_html/index.php [L,QSA]  
 </IfModule>  
 
+<IfModule mod_php7.c>
 php_value post_max_size 32M
 php_value upload_max_filesize 24M
+</IfModule>
+
+<IfModule mod_php5.c>
+php_value post_max_size 32M
+php_value upload_max_filesize 24M
+</IfModule>
