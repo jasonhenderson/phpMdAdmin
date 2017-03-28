@@ -76,7 +76,6 @@ if (!empty($controller->assets)) {
     echo "</a>";
     echo "<section id=\"assets\" class=\"collapse editor\">";
     for ($i = 0; $i < count($controller->assets); $i++) {
-        // echo "<img src=\"" . BASE_PATH . $asset["assetPath"] . "\" />";
         $addRow = $i % 4;
 
         $asset = $controller->assets[$i];
@@ -84,7 +83,7 @@ if (!empty($controller->assets)) {
         if ($addRow) echo "<div class=\"row\">";
 
         echo "  <div class=\"col-md-3\">";
-        echo "    <img src=\"" . BASE_PATH . $asset["assetPath"] . "\" data-asset=\"" . $asset["asset"] . "\"/>";
+        echo "    <img src=\"" . BASE_PATH . "/assets/" . $asset["group"] . "/" . $asset["asset"] . "\" data-asset=\"" . $asset["asset"] . "\" data-group=\"" . $asset["group"] . "\"/>";
         echo "  </div>";
 
         if ($addRow) echo "</div>";
@@ -138,8 +137,9 @@ if (!empty($controller->assets)) {
             toolbar: ["bold", {
     			name: "image",
     			action: function(editor) {
+    			    var group = selectedImage ? selectedImage.data("group") : "";
     			    var asset = selectedImage ? selectedImage.data("asset") : "";
-    			    var template = "![choose or remove: right|left|full|none]({PATH}/assets/" + asset;
+    			    var template = "![choose or remove: right|left|full|none](/assets/" + group + "/" + asset;
     			    editor.options.insertTexts["image"] = [template, ")"]
     				SimpleMDE.drawImage(editor);
     			},

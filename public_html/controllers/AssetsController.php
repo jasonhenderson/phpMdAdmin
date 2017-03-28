@@ -39,9 +39,9 @@ class AssetsController extends FileControllerBase {
             error_log("getting file path: $filePath");
 
             if (file_exists($filePath)) {
-                header('Content-Description: File Transfer');
+                //header('Content-Description: File Transfer');
                 header('Content-Type: ' . mime_content_type($filePath));
-                header('Content-Disposition: attachment; filename="' . ltrim(basename($filePath), "_") . '"');
+                //header('Content-Disposition: attachment; filename="' . ltrim(basename($filePath), "_") . '"');
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate');
                 header('Pragma: public');
