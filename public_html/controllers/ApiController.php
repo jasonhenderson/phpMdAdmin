@@ -40,9 +40,9 @@ class ApiController extends ControllerBase {
                 $this->master = '/threePanel.php';
                 $this->message = $error;
                 $this->level = ErrorLevel::Error;
-                $this->redirect = BASE_PATH . "/";
             }
 
+            $this->redirect = BASE_PATH . "/";
             $this->data = [
             'status' => '0',
             'message' => 'Group successfully added.'
