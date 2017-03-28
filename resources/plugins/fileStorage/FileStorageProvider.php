@@ -167,6 +167,7 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
         $this->group = $group;
         // See if the folder exists, and if not, create it
         if (!file_exists($this->groupDir())) {
+            error_log("making group directory: " . $this->group);
             mkdir($this->groupDir(), 0777, true);
         }
         else {
@@ -456,11 +457,13 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
         if (empty($dataDir)) {
             $dataDir = ROOT_PATH . $dataRelDir;
         }
+        else {
+            $dataDir = $dataDir . $dataRelDir;
+        }
 
         $this->dataDir = $dataDir;
 
-        error_log("data directory");
-        error_log($this->dataDir);
+        error_log("data directory: $dataDir");
     }
 
 
