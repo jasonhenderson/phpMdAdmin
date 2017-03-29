@@ -244,6 +244,9 @@ class Config
         if (empty($base)) {
             $base = '/' . basename(realpath(dirname(__FILE__) . '/../'));
         }
+        else {
+            echo "this is base: $base";
+        }
 
         return $base;
     }
