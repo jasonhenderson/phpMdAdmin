@@ -241,11 +241,10 @@ class Config
     public static function getBasePath()
     {
         $base = getenv("APP_BASEPATH");
-        if (empty($base)) {
+
+        // getenv returns false if not set
+        if (!$base) {
             $base = '/' . basename(realpath(dirname(__FILE__) . '/../'));
-        }
-        else {
-            echo "this is base: $base";
         }
 
         return $base;
