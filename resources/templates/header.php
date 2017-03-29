@@ -44,7 +44,7 @@ if (property_exists($controller, "heading")) {
             <ul class="nav navbar-nav">
                 <li><a href="admin/setup">Admin</a></li>
                 <li><a href="#">Help<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Markdown Reference</a></li>
+                <li><a href="https://simplemde.com/markdown-guide">Markdown Reference</a></li>
             </ul>
         </div>
 

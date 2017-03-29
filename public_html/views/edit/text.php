@@ -55,7 +55,7 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="#">Help<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Markdown Reference</a></li>
+                    <li><a href="https://simplemde.com/markdown-guide">Markdown Reference</a></li>
                 </ul>
                 <div class="navbar-form navbar-left">
                     <a class="btn btn-warning" href="<?php echo BASE_PATH?>/files/<?php echo $controller->group;?>" id="cancelButton"

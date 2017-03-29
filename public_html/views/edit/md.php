@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="#">Help<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Markdown Reference</a></li>
+                    <li><a href="https://simplemde.com/markdown-guide">Markdown Reference</a></li>
                 </ul>
                 <div class="navbar-form navbar-left">
                     <a class="btn btn-warning" href="<?php echo BASE_PATH?>/files/<?php echo $controller->group;?>" id="cancelButton"
@@ -134,18 +134,22 @@ if (!empty($controller->assets)) {
                 link: ["[", "](http://)"],
                 table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
             },
-            toolbar: ["bold", {
-    			name: "image",
-    			action: function(editor) {
-    			    var group = selectedImage ? selectedImage.data("group") : "";
-    			    var asset = selectedImage ? selectedImage.data("asset") : "";
-    			    var template = "![choose or remove: right|left|full|none](/assets/" + group + "/" + asset;
-    			    editor.options.insertTexts["image"] = [template, ")"]
-    				SimpleMDE.drawImage(editor);
-    			},
-    			className: "fa fa-image",
-    			title: "Custom Button",
-		    }],
+            toolbar: ["clean-block", "|", "bold", "italic", "heading", "|",
+                "code", "quote", "unordered-list", "ordered-list", "|",
+                "link", {
+                name: "image",
+                action: function(editor) {
+                    var group = selectedImage ? selectedImage.data("group") : "";
+                    var asset = selectedImage ? selectedImage.data("asset") : "";
+                    var template = "![choose or remove: right|left|full|none](/assets/" + group + "/" + asset;
+                    editor.options.insertTexts["image"] = [template, ")"]
+                    SimpleMDE.drawImage(editor);
+                },
+                className: "fa fa-image",
+                title: "Custom Button"
+                }, "table", "horizontal-rule", "|",
+                "preview", "side-by-side", "fullscreen", "|", "guide"
+		    ],
             placeholder: "Type here...",
             renderingConfig: {
                 codeSyntaxHighlighting: true,
