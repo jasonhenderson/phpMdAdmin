@@ -243,7 +243,7 @@ class Config
         $base = getenv("APP_BASEPATH");
 
         // getenv returns false if not set
-        if (!$base) {
+        if ($base === false) {
             $base = '/' . basename(realpath(dirname(__FILE__) . '/../'));
         }
 
