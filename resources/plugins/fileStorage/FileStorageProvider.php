@@ -26,7 +26,7 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
 
     public $dataRelDir;
     public $dataDir;
-    public $groupName;
+    public $group;
 
     /**
      *
@@ -127,12 +127,12 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
      * @param string  $group
      * @return
      */
-    public function assets($group)
+    public function assets()
     {
         $assets = [];
 
-        // Group must be provided
-        if (empty($group)) return $assets;
+        error_log("asset dir: " . $this->assetsDir());
+        error_log("group: " . $this->group);
 
         // Find the directories
         $items = scandir($this->assetsDir());
@@ -145,7 +145,7 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
                 !in_array($item, array(".", ".."))) {
 
                 $assets[] = [
-                "group" => $group,
+                "group" => $this->group,
                 "asset" => $itemName,
                 "assetPath" => $this->assetsPath() . "/" . $item
                 ];
@@ -300,6 +300,26 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
 
         if (!file_exists($path)) {
             return "File doesn't exist, so cannot remove it";
+        }
+        else {
+            unlink($path);
+            return NULL;
+        }
+    }
+
+
+    /**
+     *
+     *
+     * @param string  $asset
+     * @return
+     */
+    public function removeAsset($asset)
+    {
+        $path = $this->assetFilePath($asset);
+
+        if (!file_exists($path)) {
+            return "Asset doesn't exist, so cannot remove it";
         }
         else {
             unlink($path);

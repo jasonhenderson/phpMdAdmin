@@ -241,7 +241,7 @@ class Config
     public static function getBasePath()
     {
         $base = getenv("APP_BASEPATH");
-        if (is_null($base)) {
+        if (isset($base)) {
             $base = '/' . basename(realpath(dirname(__FILE__) . '/../'));
         }
         return $base;
@@ -249,10 +249,6 @@ class Config
 
 
 }
-
-
-// Creating constants for heavily used paths makes things a lot easier.
-// ex. require_once(LIBRARY_PATH . "Paginator.php")
 
 
 //    Error reporting.

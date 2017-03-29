@@ -28,7 +28,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <a class="btn btn-action" href="<?php echo BASE_PATH?>/files/<?php echo $controller->group ?>" >
+        <a class="btn btn-action" href="<?php echo BASE_PATH?>/assets/<?php echo $controller->group ?>" >
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
             Back
         </a>
@@ -119,7 +119,7 @@
             })
             .done(function(data) {
                 console.log('upload done');
-                window.location.href = "<?php echo BASE_PATH?>/files/<?php echo $controller->group ?>";
+                window.location.href = "<?php echo BASE_PATH?>/assets/<?php echo $controller->group ?>";
                 console.log(data);
             })
             .fail(function(xhr) {

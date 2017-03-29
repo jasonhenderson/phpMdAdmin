@@ -35,21 +35,9 @@
         </a>
     </div>
     <div class="col-md-4 col-md-offset-6">
-        <form class="form-inline" action="<?php echo BASE_PATH?>/api/createFile" method="POST">
-            <div class="form-group">
-                <!--<a class="btn btn-success" href="<?php echo BASE_PATH?>/assets/upload/<?php echo $controller->group ?>">-->
-                <!--    Add <span class="glyphicon glyphicon-picture glyphicon-reverse" aria-hidden="true"></span>-->
-                <!--</a>-->
-                <label class="sr-only" for="file">Create New Group</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="New File Name" id="file" name="file">
-                    <input type="hidden" name="group" value="<?php echo $controller->group?>">
-                </div>
-                <button type="submit" class="btn btn-success" name="submit">
-                    <span class="glyphicon glyphicon-plus glyphicon-reverse" aria-hidden="true"></span>
-                </button>
-            </div>
-        </form>
+        <a class="btn btn-success" href="<?php echo BASE_PATH?>/assets/upload/<?php echo $controller->group ?>">
+            Add <span class="glyphicon glyphicon-picture glyphicon-reverse" aria-hidden="true"></span>
+        </a>
     </div>
 </div>
 
@@ -60,13 +48,13 @@
         <thead>
             <tr>
                 <th>
-                    File
+                    Asset
                 </th>
                 <th>
                     Actions
                 </th>
-                <th colspan="2">
-                    Page URL
+                <th>
+                    Asset URL
                 </th>
             </tr>
         </thead>
@@ -85,19 +73,14 @@ $urlBase      = $urlScheme . "://" . $urlHost . BASE_PATH;
 
 // Add a row that holds another table for the files
 
-foreach ($controller->files as $file) {
-    $pageUrl       = "/view/md/" . $file["group"] . "/" . $file["name"];
-    $pagePdfUrl = "/view/pdf/md/" . $file["group"] . "/" . $file["name"];
-    $slidesUrl = "/view/slides/" . $file["group"] . "/" . $file["name"];
-    $slidesPdfUrl = "/view/pdf/slides/" . $file["group"] . "/" . $file["name"];
-    $pageEditorUrl = "/edit/" . $file["group"] . "/" . $file["name"];
-    $pageTextEditorUrl = "/edit/text/" . $file["group"] . "/" . $file["name"];
-    $pageDeleteUrl = "/api/removeFile/" . $file["group"] . "/" . $file["name"];
+foreach ($controller->assets as $asset) {
+    $assetUrl       = "/assets/" . $asset["group"] . "/" . $asset["asset"];
+    $assetDeleteUrl = "/api/removeAsset/" . $asset["group"] . "/" . $asset["asset"];
 
     echo "<tr>";
 
     echo "<td class='vert-align'>";
-    echo $file["name"];
+    echo $asset["asset"];
     echo "</td>";
 
     // Action buttons dropdown
@@ -109,36 +92,29 @@ foreach ($controller->files as $file) {
     echo "        Action <span class='caret'></span>";
     echo "    </button>";
     echo "    <ul class='dropdown-menu'>";
-    echo "        <li><a href='" . BASE_PATH . $pageEditorUrl . "'>Edit Page</a></li>";
-    echo "        <li><a href='" . BASE_PATH . $pageTextEditorUrl . "'>Text Edit Page</a></li>";
+    echo "        <li><a href='" . BASE_PATH . $assetUrl . "' target='_blank'>View Asset</a></li>";
     echo "        <li role='separator' class='divider'></li>";
-    echo "        <li><a href='" . BASE_PATH . $pageUrl . "' target='_blank'>View Page</a></li>";
-    echo "        <li><a href='" . BASE_PATH . $pagePdfUrl . "' target='_blank'>View Page PDF</a></li>";
-    echo "        <li><a href='" . BASE_PATH . $slidesUrl . "' target='_blank'>View Slides</a></li>";
-    echo "        <li role='separator' class='divider'></li>";
-    echo "        <li><a href='" . BASE_PATH . $pageDeleteUrl . "'>Delete Page</a></li>";
+    echo "        <li><a href='" . BASE_PATH . $assetDeleteUrl . "'>Delete Asset</a></li>";
     echo "    </ul>";
     echo "</div>";
     echo "</td>";
 
     // Page URL clipboard input and button
-    echo "<td class='vert-align'>";
-    echo "<div class='btn-group'>";
-    echo "    <button type='button' class='btn btn-primary dropdown-toggle'";
-    echo "            data-toggle='dropdown'";
-    echo "            aria-haspopup='true' aria-expanded='false'>";
-    echo "        URL <span class='caret'></span>";
-    echo "    </button>";
-    echo "    <ul class='dropdown-menu'>";
-    echo "        <li><a class='url' data-row='" . $rowNumber . "' href='" . $urlBase . $pageUrl . "'>Page</a></li>";
-    echo "        <li><a class='url' data-row='" . $rowNumber . "' href='" . $urlBase . $slidesUrl . "'>Slides</a></li>";
-    // echo "        <li><a class='url' href=''>PDF</a></li>";
-    echo "    </ul>";
-    echo "</div>";
-    echo "</td>";
+    // echo "<td class='vert-align'>";
+    // echo "<div class='btn-group'>";
+    // echo "    <button type='button' class='btn btn-primary dropdown-toggle'";
+    // echo "            data-toggle='dropdown'";
+    // echo "            aria-haspopup='true' aria-expanded='false'>";
+    // echo "        URL <span class='caret'></span>";
+    // echo "    </button>";
+    // echo "    <ul class='dropdown-menu'>";
+    // echo "        <li><a class='url' data-row='" . $rowNumber . "' href='" . $urlBase . $assetUrl . "'>Asset</a></li>";
+    // echo "    </ul>";
+    // echo "</div>";
+    // echo "</td>";
     echo "<td>";
     echo "<div class='input-group'>";
-    echo "    <input id='pageUrl" . $rowNumber . "' type='text' class='form-control' data-auto-select='true'>";
+    echo "    <input id='pageUrl" . $rowNumber . "' type='text' class='form-control' data-auto-select='true' value='" . $urlBase . $assetUrl . "'>";
     echo "    <span class='input-group-btn'>";
     echo "        <button class='btn btn-default copyable' type='button' data-clipboard-target='#pageUrl" . $rowNumber . "'>Copy</button>";
     echo "    </span>";
@@ -188,14 +164,5 @@ foreach ($controller->files as $file) {
         $('.table-responsive').on('hide.bs.dropdown', function() {
             $(this).css("padding-bottom", 0);
         })
-
-        // $('.delete').click(function(e) {
-        //     e.preventDefault();
-        //     var action = $(this).attr("href");
-        //     post(action, {
-        //         group: $(this).data("group"),
-        //         file: $(this).data("file"),
-        //     });
-        // });
     });
 </script>

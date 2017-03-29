@@ -13,7 +13,7 @@ dokku config:set phpmdadmin BUILDPACK_URL=https://github.com/heroku/heroku-build
 ```
 5. Set the base path environment variable to an empty string
 ```
-dokku config:set phpmdadmin PHPMDADMIN_BASE=
+dokku config:set phpmdadmin APP_BASEPATH=
 ```
 
 ### Dokku Storage

@@ -7,7 +7,4 @@
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule \.(css|js|png|jpg|jpeg|pdf|gif|ico)$ - [NC,L]
     RewriteRule ^(.*)$ public_html/index.php [L,QSA]  
-
-    #php_value post_max_size 32M
-    #php_value upload_max_filesize 24M
 </IfModule>  

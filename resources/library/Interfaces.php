@@ -46,7 +46,7 @@ interface iStorageProvider {
      *
      * @param string  $group
      */
-    public function assets($group);
+    public function assets();
 
     /**
      *
@@ -84,6 +84,13 @@ interface iStorageProvider {
      * @param string  $name
      */
     public function removeFile($name);
+
+    /**
+     *
+     *
+     * @param string  $name
+     */
+    public function removeAsset($name);
 
     /**
      *

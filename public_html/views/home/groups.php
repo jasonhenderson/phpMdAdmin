@@ -72,6 +72,8 @@ foreach ($controller->groups as $group) {
     echo "<td class='vert-align'>";
     echo "<a href='$basePath/files/$groupName' class='btn btn-primary' role='button'>Manage Files</a>";
     echo "&nbsp;";
+    echo "<a href='$basePath/assets/$groupName' class='btn btn-primary' role='button'>Manage Assets</a>";
+    echo "&nbsp;";
     echo "<a href='$basePath/api/removeGroup/$groupName' class='btn btn-danger' role='button'>Remove Group</a>";
     echo "</td>";
 

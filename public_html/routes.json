@@ -36,13 +36,17 @@
       "controller": "EditController.text",
       "method": "GET"
     }, {
-      "path": "/assets/:group/:file",
-      "controller": "AssetsController.index",
-      "method": "GET"
-    }, {
       "path": "/assets/upload/:group",
       "controller": "AssetsController.upload",
       "method": "GET,POST"
+    }, {
+      "path": "/assets/:group/:asset",
+      "controller": "AssetsController.index",
+      "method": "GET"
+    }, {
+      "path": "/assets/:group",
+      "controller": "AssetsController.index",
+      "method": "GET"
     }, {
       "path": "/api/createGroup",
       "controller": "ApiController.createGroup",
@@ -58,6 +62,10 @@
     }, {
       "path": "/api/removeFile/:group/:file",
       "controller": "ApiController.removeFile",
+      "method": "GET"
+    }, {
+      "path": "/api/removeAsset/:group/:asset",
+      "controller": "ApiController.removeAsset",
       "method": "GET"
     }
  ]

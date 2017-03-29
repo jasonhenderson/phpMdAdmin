@@ -62,7 +62,7 @@ class EditController extends FileControllerBase {
             $this->text = Config::storage($group)->text($file);
 
             // Get the list of files
-            $this->assets = Config::storage($group)->assets($group);
+            $this->assets = Config::storage($group)->assets();
         }
 
         $this->render();

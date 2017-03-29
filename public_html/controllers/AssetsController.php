@@ -28,34 +28,39 @@ class AssetsController extends FileControllerBase {
      *
      *
      * @param string  $group
-     * @param string  $file
+     * @param string  $asset (optional)
      */
-    public function index($group, $file = NULL)
+    public function index($group, $asset = NULL)
     {
         // Save data if passed up
         // Always show image again
-        if (!empty($file)) {
-            $filePath = Config::storage($group)->assetFilePath($file);
-            error_log("getting file path: $filePath");
+        if (!empty($asset)) {
+            $assetPath = Config::storage($group)->assetFilePath($asset);
+            error_log("getting file path: $assetPath");
 
-            if (file_exists($filePath)) {
-                //header('Content-Description: File Transfer');
-                header('Content-Type: ' . mime_content_type($filePath));
-                //header('Content-Disposition: attachment; filename="' . ltrim(basename($filePath), "_") . '"');
+            if (file_exists($assetPath)) {
+                header('Content-Type: ' . mime_content_type($assetPath));
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate');
                 header('Pragma: public');
-                header('Content-Length: ' . filesize($filePath));
-                readfile($filePath);
+                header('Content-Length: ' . filesize($assetPath));
+                readfile($assetPath);
                 exit;
             }
         }
 
+        error_log("no asset: $asset");
+
         // Just show the upload page
-        $this->pageTitle = "edit $group";
-        $this->view = '/assets/upload.php';
+        $this->pageTitle = "assets for $group";
+        $this->view = '/assets/assets.php';
         $this->master = '/threePanel.php';
+        $this->heading = $group;
         $this->group = $group;
+
+        // Get the assets list
+        $this->assets = Config::storage($group)->assets();
+
         $this->render();
     }
 

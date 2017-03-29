@@ -178,4 +178,43 @@ class ApiController extends ControllerBase {
     }
 
 
+    /**
+     *
+     *
+     * @param string  $group
+     * @param string  $asset
+     */
+    public function removeAsset($group, $asset)
+    {
+        if (empty($group)) {
+            $error = "Group is required to remove the asset";
+        }
+        elseif (empty($asset)) {
+            $error = "File name is required to remove the asset";
+        }
+        else {
+            $error = Config::storage($group)->removeAsset($asset);
+
+            $this->data = [
+            'status' => '0',
+            'message' => 'Asset successfully removed.'
+            ];
+        }
+
+        if (!empty($error)) {
+            $this->view = '/admin/error.php';
+            $this->master = '/threePanel.php';
+            $this->message = $error;
+            $this->level = ErrorLevel::Error;
+        }
+        else {
+            $this->view = '/api/redirect.php';
+            $this->master = '/empty.php';
+        }
+        $this->redirect = BASE_PATH . "/assets/" . $group;
+
+        $this->render();
+    }
+
+
 }
