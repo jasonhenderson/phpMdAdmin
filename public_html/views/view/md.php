@@ -22,7 +22,7 @@
 // Reference global controller
 ?>
 
-<div class="container">
+<div class="container viewer">
 <?php
 echo $controller->html;
 ?>

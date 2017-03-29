@@ -69,6 +69,26 @@ html body .container-fluid.body-content {
     margin: 10px;
 }
 
+img[alt="full"] { 
+  width: 90%;
+}
+
+img[alt="right"] { 
+  float:right;
+  width:60%;
+  padding-left:20px;
+}
+
+img[alt="left"] { 
+  float:left;
+  width:60%;
+  padding-right:20px;
+}
+
+.viewer img {
+    width:100%;
+}
+
 @media (min-width: 768px) {
     .footer {
         text-align: left;

@@ -21,8 +21,8 @@
 
 ?>
 
-        <div class="markdown-body">
+<div class="markdown-body viewer">
 <?php
 echo $controller->text;
 ?>
-        </div>
+</div>
