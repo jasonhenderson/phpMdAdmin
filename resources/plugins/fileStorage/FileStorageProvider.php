@@ -131,9 +131,6 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
     {
         $assets = [];
 
-        error_log("asset dir: " . $this->assetsDir());
-        error_log("group: " . $this->group);
-
         // Find the directories
         $items = scandir($this->assetsDir());
 
