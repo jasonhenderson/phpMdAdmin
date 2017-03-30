@@ -86,7 +86,7 @@ img[alt="left"] {
 }
 
 .viewer img {
-    width:100%;
+    max-width:100%;
 }
 
 @media (min-width: 768px) {

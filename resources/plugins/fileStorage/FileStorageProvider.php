@@ -185,11 +185,11 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
         // Set the group name and setup the paths
         $this->group = $group;
         $groupDir = $this->groupDir();
-        // See if the folder exists, and if not, create it
+        // See if the folder exists, and if not, remove it
         if (!file_exists($groupDir)) {
             return "Group doesn't exist, so cannot remove it";
         }
-        elseif (!$this->is_dir_empty($groupDir)) {
+        elseif (!$this->isGroupDirEmpty($groupDir)) {
             return "There are files in the group. Remove the files first and try again";
         }
         else {
@@ -206,7 +206,7 @@ class FileStorageProvider implements iStorageProvider, iFileServer {
      * @param string  $dir
      * @return
      */
-    function is_dir_empty($dir)
+    function isGroupDirEmpty($dir)
     {
         if (!is_readable($dir)) return NULL;
         return count(scandir($dir)) == 2;

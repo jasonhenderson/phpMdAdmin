@@ -21,7 +21,7 @@
 
 require_once CONTROLLERS_PATH . '/FileControllerBase.php';
 
-use cebe;
+//use cebe;
 use Dompdf\Dompdf;
 //use JonnyW\PhantomJs\Client;
 
@@ -221,6 +221,11 @@ class ViewController extends FileControllerBase {
                 implode(
                 "; ",
                 array_map(
+
+
+                    /**
+                     *
+                     */
                     function($k, $v)
                     {
                         return "$k=$v";
@@ -277,6 +282,13 @@ class ViewController extends FileControllerBase {
     }
 
 
+    /**
+     *
+     *
+     * @param string  $type
+     * @param string  $group
+     * @param string  $file
+     */
     private function printWithPhantomJS($type, $group, $file)
     {
         $url = $this->siteURL(BASE_PATH . "/view/$type/$group/$file");
